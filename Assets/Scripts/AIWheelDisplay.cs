@@ -10,7 +10,6 @@ public class AIWheelDisplay : MonoBehaviour
     {
         if (newWords.Length != 8)
         {
-            UnityEngine.Debug.LogError("Must pass exactly 8 words!");
             return;
         }
 

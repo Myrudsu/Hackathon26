@@ -1,10 +1,14 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Networking;
 using static System.Net.Mime.MediaTypeNames;
+
+#region Data Models
 
 [Serializable]
 public class WordList
@@ -19,35 +23,91 @@ public class WordDictionaryWrapper
     public List<WordList> entries = new List<WordList>();
 }
 
+[Serializable]
+public class StringArrayWrapper
+{
+    public string[] words;
+}
+
+#endregion
+
 public class Program : MonoBehaviour
 {
-    string dataPath1;
-    string dataPath2;
+    private string dataPath1;
+    private string dataPath2;
+
+    // Cached data (important for performance)
+    private WordDictionaryWrapper cachedWrapper;
+    private StringArrayWrapper cachedEnglish;
 
     void Awake()
     {
-        dataPath1 = Path.Combine(UnityEngine.Application.dataPath, "sampleprocessed.json");
-        UnityEngine.Debug.Log("JSON saved to: " + dataPath1);
-        dataPath2 = Path.Combine(UnityEngine.Application.dataPath, "20kprocessed.json");
-    }
-
-    private void InitializePaths()
-    {
-        // now these are valid
-        dataPath1 = Path.Combine(UnityEngine.Application.dataPath, "sampleprocessed.json");
-        dataPath2 = Path.Combine(UnityEngine.Application.dataPath, "20kprocessed.json");
-    }
-
-
-    public void Trainer()
-    {
         InitializePaths();
+        StartCoroutine(Initialize());
+    }
+
+    void InitializePaths()
+    {
+        dataPath1 = Path.Combine(UnityEngine.Application.persistentDataPath, "sampleprocessed.json");
+        dataPath2 = Path.Combine(UnityEngine.Application.persistentDataPath, "20kprocessed.json");
+    }
+
+    IEnumerator Initialize()
+    {
+        if (!File.Exists(dataPath1) || !File.Exists(dataPath2))
+        {
+            yield return StartCoroutine(TrainerCoroutine());
+        }
+
+        LoadCachedData();
+    }
+
+    #region StreamingAssets Loading (ANDROID SAFE)
+
+    IEnumerator ReadStreamingAsset(string fileName, Action<string> onLoaded)
+    {
+        string path = Path.Combine(UnityEngine.Application.streamingAssetsPath, fileName);
+
+        UnityWebRequest request = UnityWebRequest.Get(path);
+        yield return request.SendWebRequest();
+
+        if (request.result != UnityWebRequest.Result.Success)
+        {
+            UnityEngine.Debug.LogError($"Failed to load {fileName}: {request.error}");
+            onLoaded?.Invoke(null);
+        }
+        else
+        {
+            onLoaded?.Invoke(request.downloadHandler.text);
+        }
+    }
+
+    #endregion
+
+    #region Training
+
+    IEnumerator TrainerCoroutine()
+    {
+        string sampleText = null;
+        string english2k = null;
+
+        yield return ReadStreamingAsset("sample.txt", t => sampleText = t);
+        yield return ReadStreamingAsset("20k.txt", t => english2k = t);
+
+        if (string.IsNullOrEmpty(sampleText) || string.IsNullOrEmpty(english2k))
+        {
+            UnityEngine.Debug.LogError("Training aborted: missing text files");
+            yield break;
+        }
+
+        TrainFromText(sampleText, english2k);
+    }
+
+    void TrainFromText(string text, string english2k)
+    {
         var dict = new Dictionary<string, List<(string Word, int Count)>>();
 
-        string text = File.ReadAllText(Path.Combine(UnityEngine.Application.streamingAssetsPath, "sample.txt"));
         string[] words = text.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-
-        string english2k = File.ReadAllText(Path.Combine(UnityEngine.Application.streamingAssetsPath, "20k.txt"));
         string[] english2kwords = english2k.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
         for (int i = 0; i < words.Length - 1; i++)
@@ -56,18 +116,17 @@ public class Program : MonoBehaviour
             string nextWord = words[i + 1].ToLower();
 
             if (!dict.ContainsKey(currentWord))
-                dict[currentWord] = new List<(string Word, int Count)>();
+                dict[currentWord] = new List<(string, int)>();
 
-            int index = dict[currentWord].FindIndex(item => item.Word == nextWord);
+            int index = dict[currentWord].FindIndex(x => x.Word == nextWord);
 
             if (index == -1)
                 dict[currentWord].Add((nextWord, 1));
             else
-                dict[currentWord][index] =
-                    (nextWord, dict[currentWord][index].Count + 1);
+                dict[currentWord][index] = (nextWord, dict[currentWord][index].Count + 1);
         }
 
-        List<string> commonwords = new List<string>
+        List<string> commonWords = new List<string>
         { "the", "be", "to", "of", "and", "a", "in", "that" };
 
         WordDictionaryWrapper wrapper = new WordDictionaryWrapper();
@@ -76,94 +135,77 @@ public class Program : MonoBehaviour
         {
             var sorted = pair.Value
                 .OrderByDescending(x => x.Count)
+                .Where(x => x.Count > 1 && !commonWords.Contains(x.Word))
+                .Select(x => x.Word)
                 .ToList();
-
-            List<string> finalWords = new List<string>();
-
-            foreach (var item in sorted)
-            {
-                if (!commonwords.Contains(item.Word) && item.Count > 1)
-                    finalWords.Add(item.Word);
-            }
 
             wrapper.entries.Add(new WordList
             {
                 key = pair.Key,
-                values = finalWords
+                values = sorted
             });
         }
 
-        string json1 = JsonUtility.ToJson(wrapper, true);
-        File.WriteAllText(dataPath1, json1);
+        File.WriteAllText(dataPath1, JsonUtility.ToJson(wrapper, true));
+        File.WriteAllText(
+            dataPath2,
+            JsonUtility.ToJson(new StringArrayWrapper { words = english2kwords }, true)
+        );
 
-        string json2 = JsonUtility.ToJson(new StringArrayWrapper { words = english2kwords }, true);
-        File.WriteAllText(dataPath2, json2);
-
-        //Debug.Log("Training Complete");
+        UnityEngine.Debug.Log("Training complete");
     }
+
+    #endregion
+
+    #region Cached Load
+
+    void LoadCachedData()
+    {
+        cachedWrapper = JsonUtility.FromJson<WordDictionaryWrapper>(File.ReadAllText(dataPath1));
+        cachedEnglish = JsonUtility.FromJson<StringArrayWrapper>(File.ReadAllText(dataPath2));
+    }
+
+    #endregion
+
+    #region Predictor
 
     public string[] Predictor(string previousWord, string currentLetters)
     {
-        if (!File.Exists(dataPath1) || !File.Exists(dataPath2))
-        {
-           //Debug.LogError("JSON files not found. Run Trainer() first.");
+        if (cachedWrapper == null || cachedEnglish == null)
             return new string[8];
-        }
 
-        string json1 = File.ReadAllText(dataPath1);
-        string json2 = File.ReadAllText(dataPath2);
+        string prev = previousWord?.ToLower() ?? "";
+        string current = currentLetters?.ToLower() ?? "";
 
-        WordDictionaryWrapper wrapper =
-            JsonUtility.FromJson<WordDictionaryWrapper>(json1);
+        List<string> results = new List<string>();
 
-        StringArrayWrapper englishWrapper =
-            JsonUtility.FromJson<StringArrayWrapper>(json2);
-
-        string input1 = previousWord.ToLower();
-        string input2 = currentLetters.ToLower();
-
-        List<string> predictwords = new List<string>();
-
-        if (string.IsNullOrEmpty(input1) || input1.Contains('.'))
+        if (string.IsNullOrEmpty(prev) || prev.Contains("."))
         {
-            predictwords.AddRange(englishWrapper.words);
+            results.AddRange(cachedEnglish.words);
         }
         else
         {
-            var entry = wrapper.entries
-                .FirstOrDefault(e => e.key == input1);
-
+            var entry = cachedWrapper.entries.FirstOrDefault(e => e.key == prev);
             if (entry != null)
-                predictwords.AddRange(entry.values);
+                results.AddRange(entry.values);
 
-            predictwords.AddRange(englishWrapper.words);
+            results.AddRange(cachedEnglish.words);
         }
 
-        if (!string.IsNullOrEmpty(input2))
-        {
-            predictwords = predictwords
-                .Where(w => w.StartsWith(input2))
-                .ToList();
-        }
+        if (!string.IsNullOrEmpty(current))
+            results = results.Where(w => w.StartsWith(current)).ToList();
 
-        string[] top8 = predictwords
+        string[] top = results
             .Distinct()
             .Take(8)
             .ToArray();
 
         string[] padded = new string[8];
-
         for (int i = 0; i < 8; i++)
-        {
-            padded[i] = i < top8.Length ? top8[i] : "null";
-        }
+            padded[i] = i < top.Length ? top[i] : "null";
 
         return padded;
     }
-}
 
-[Serializable]
-public class StringArrayWrapper
-{
-    public string[] words;
+    #endregion
 }

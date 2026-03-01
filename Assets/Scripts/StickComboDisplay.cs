@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static System.Net.Mime.MediaTypeNames;
 using System.Linq;
+using System;
 
 public class StickComboDisplay : MonoBehaviour
 {
@@ -24,22 +25,22 @@ public class StickComboDisplay : MonoBehaviour
     int[] numbers = new int[8] {3, 2, 1, 8, 7, 6, 5, 4 };
     private string letter = "_";
 
-    private Program markov = new Program();
+    private Program markov;
     
 
     void Awake()
     {
-       // markov.Trainer();
+        markov = GetComponent<Program>();
         lookup = new Dictionary<int, string>
         {
-            { 81, " and " },
-            { 82, " for " },
-            { 83, " in " },
-            { 84, " that " },
-            { 85, " the " },
-            { 86, " be " },
-            { 87, " to " },
-            { 88, " of" },
+            { 81, "and " },
+            { 82, "for " },
+            { 83, "in " },
+            { 84, "that " },
+            { 85, "the " },
+            { 86, "be " },
+            { 87, "to " },
+            { 88, "of" },
 
             { 71, "d" },
             { 72, "e" },
@@ -72,14 +73,14 @@ public class StickComboDisplay : MonoBehaviour
             { 42, "n't" },
             { 43, "'re" },
             { 44, "'s " },
-            { 45, "x " },
-            { 46, "y " },
-            { 47, "z " },
+            { 45, "x" },
+            { 46, "y" },
+            { 47, "z" },
             { 48, "'ll " },
 
             { 31, "Backspace" },
-            { 32, "Caps" },
-            { 33, "" },
+            { 32, "" },
+            { 33, "Caps" },
             { 34, "" },
             { 35, "Ctrl+Backspace" },
             { 36, "" },
@@ -148,7 +149,8 @@ public class StickComboDisplay : MonoBehaviour
                 }
             else
                 {
-                    output += letter;
+                // output += letter;
+                AppendSmart(letter);
                 }
         }
 
@@ -156,10 +158,20 @@ public class StickComboDisplay : MonoBehaviour
 
         //Go fetch new letter 
         letter = GetLetterFromCombo(leftDir, rightDir);
-
+        if (letter != "Backspace" && letter != "Ctrl+Backspace")
+        {
+            letterText.text = output + (string.IsNullOrEmpty(letter) ? "_" : letter);
+        }
         //set the output fields
+
+        if (capsOn == true)
+        {
+            for (int i = 0; i < words.Length; i++)
+            {
+                words[i] = words[i].ToUpper();
+            }
+        }
         
-        letterText.text = output+letter;
         aiWheel.SetWords(words);
         
     }
@@ -170,8 +182,6 @@ public class StickComboDisplay : MonoBehaviour
             .Where(kv => kv.Key.ToString().StartsWith(left.ToString()))
             .Select(kv => kv.Value)
             .ToArray();
-
-        UnityEngine.Debug.Log("results: " + results[1] + results[2] + results[7]);
         return results;
     }
 
@@ -245,7 +255,10 @@ public class StickComboDisplay : MonoBehaviour
 
         int end = output.Length - 1;
         while (end >= 0 && output[end] == ' ')
+        {
+            output = output.Remove(end);
             end--;
+        }
 
         if (end < 0)
         {
@@ -264,7 +277,6 @@ public class StickComboDisplay : MonoBehaviour
     {
         string lastWord = getLatestWord();
         string previousWord = getPreviousWord();
-        UnityEngine.Debug.Log(lastWord + " " + previousWord);
 
         string[] nextWords = markov.Predictor(previousWord ?? "", lastWord ?? "");
 
@@ -274,10 +286,15 @@ public class StickComboDisplay : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             int j = indices[i];
-            UnityEngine.Debug.Log("index: " + i);
-            lookup[10 + j] = nextWords[i];
-            predictedLineOutput += nextWords[i] + " ";
-            UnityEngine.Debug.Log("lookup index " + (11+i) + lookup[11+i]);
+            
+            if (nextWords[i] != "null")
+            {
+                lookup[10 + j] = nextWords[i];
+                predictedLineOutput += nextWords[i] + " ";
+            } else
+            {
+                lookup[10 + j] = " ";
+            }
         }
         predictiveBox.text = predictedLineOutput.Trim();
         
@@ -313,5 +330,28 @@ public class StickComboDisplay : MonoBehaviour
             }
         }
         return previousWord;
+    }
+
+    private void AppendSmart(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return;
+
+        string latestWord = getLatestWord();
+
+        // Only attempt autocomplete if we're mid-word and the new text isn't already fully typed
+        if (!string.IsNullOrEmpty(latestWord) &&
+            !output.EndsWith(" ") &&
+            text.StartsWith(latestWord) &&
+            text.Length > latestWord.Length)  // <-- Add this check
+        {
+            // Autocomplete case: append only missing suffix
+            output += text.Substring(latestWord.Length);
+        }
+        else
+        {
+            // Normal insert (common words, punctuation, etc.)
+            output += text;
+        }
     }
 }
