@@ -124,6 +124,7 @@ public class StickComboDisplay : MonoBehaviour
         {
             rightDir = numbers[rightDir - 1];
         }
+        UnityEngine.Debug.Log(leftDir + " " + rightDir);
 
 
         string[] words = updateWheel(leftDir);

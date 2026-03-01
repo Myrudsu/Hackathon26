@@ -1,0 +1,741 @@
+fileFormatVersion: 2
+guid: c4a214120c3e581468d3159624203f34
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6126567251567453065
+    second: RF_55_0
+  - first:
+      213: -2996936859922810635
+    second: RF_55_1
+  - first:
+      213: -108685426519762478
+    second: RF_55_2
+  - first:
+      213: -397003544574364708
+    second: RF_55_3
+  - first:
+      213: -4882335018127268165
+    second: RF_55_4
+  - first:
+      213: 8814188213689034869
+    second: RF_55_5
+  - first:
+      213: -129954067998158156
+    second: RF_55_6
+  - first:
+      213: -4414301414089830691
+    second: RF_55_7
+  - first:
+      213: -2848756167943237524
+    second: RF_55_8
+  - first:
+      213: -3871367308209715955
+    second: RF_55_9
+  - first:
+      213: 3300650904681308698
+    second: RF_55_10
+  - first:
+      213: 7896767512932211290
+    second: RF_55_11
+  - first:
+      213: -3420199706751085516
+    second: RF_55_12
+  - first:
+      213: 4222497983429165413
+    second: RF_55_13
+  - first:
+      213: -5493037123732127973
+    second: RF_55_14
+  - first:
+      213: 4807498197549791570
+    second: RF_55_15
+  - first:
+      213: 6410843939805033551
+    second: RF_55_16
+  - first:
+      213: 6578840268282247332
+    second: RF_55_17
+  - first:
+      213: 5993313826114520466
+    second: RF_55_18
+  - first:
+      213: -2404453095356147572
+    second: RF_55_19
+  - first:
+      213: 1900578843308172478
+    second: RF_55_20
+  - first:
+      213: 7488283412328260052
+    second: RF_55_21
+  - first:
+      213: -2692802361874165302
+    second: RF_55_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: RF_55_0
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 272
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98328329470f50550800000000000000
+      internalID: 6126567251567453065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_1
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 272
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f8b60aedcdb866d0800000000000000
+      internalID: -2996936859922810635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_2
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 273
+        width: 26
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d917003e2fdd7ef0800000000000000
+      internalID: -108685426519762478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_3
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 273
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd3f21f216f8d7af0800000000000000
+      internalID: -397003544574364708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_4
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 273
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6e2123b267e3cb0800000000000000
+      internalID: -4882335018127268165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_5
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 273
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578ae541b79425a70800000000000000
+      internalID: 8814188213689034869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 162
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b25ad3b67f423ef0800000000000000
+      internalID: -129954067998158156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_7
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 157
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddecba970404db2c0800000000000000
+      internalID: -4414301414089830691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_8
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 162
+        width: 7
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c605a0ecb5f2778d0800000000000000
+      internalID: -2848756167943237524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_9
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 162
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d05891fc1f3264ac0800000000000000
+      internalID: -3871367308209715955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_10
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 59
+        width: 203
+        height: 203
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a12e91d92844ecd20800000000000000
+      internalID: 3300650904681308698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 151
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5a5b22d634f69d60800000000000000
+      internalID: 7896767512932211290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 139
+        width: 24
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 434d43adc720980d0800000000000000
+      internalID: -3420199706751085516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_13
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 135
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 561491f4b83599a30800000000000000
+      internalID: 4222497983429165413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_14
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 139
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1fb9edd6dfc4c3b0800000000000000
+      internalID: -5493037123732127973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_15
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 65
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2593943b32aa7b240800000000000000
+      internalID: 4807498197549791570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_16
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 30
+        width: 29
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f447b8ed894e7f850800000000000000
+      internalID: 6410843939805033551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_17
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 31
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a8bff82e5cbc4b50800000000000000
+      internalID: 6578840268282247332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_18
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 30
+        width: 25
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2954ef0cb278c2350800000000000000
+      internalID: 5993313826114520466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_19
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 26
+        width: 14
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c88553c26aaa1aed0800000000000000
+      internalID: -2404453095356147572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_20
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 31
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb4a1076366306a10800000000000000
+      internalID: 1900578843308172478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_21
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 31
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d1a641c61abbe760800000000000000
+      internalID: 7488283412328260052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RF_55_22
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 31
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac1582ad48e31aad0800000000000000
+      internalID: -2692802361874165302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      RF_55_0: 6126567251567453065
+      RF_55_1: -2996936859922810635
+      RF_55_10: 3300650904681308698
+      RF_55_11: 7896767512932211290
+      RF_55_12: -3420199706751085516
+      RF_55_13: 4222497983429165413
+      RF_55_14: -5493037123732127973
+      RF_55_15: 4807498197549791570
+      RF_55_16: 6410843939805033551
+      RF_55_17: 6578840268282247332
+      RF_55_18: 5993313826114520466
+      RF_55_19: -2404453095356147572
+      RF_55_2: -108685426519762478
+      RF_55_20: 1900578843308172478
+      RF_55_21: 7488283412328260052
+      RF_55_22: -2692802361874165302
+      RF_55_3: -397003544574364708
+      RF_55_4: -4882335018127268165
+      RF_55_5: 8814188213689034869
+      RF_55_6: -129954067998158156
+      RF_55_7: -4414301414089830691
+      RF_55_8: -2848756167943237524
+      RF_55_9: -3871367308209715955
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
