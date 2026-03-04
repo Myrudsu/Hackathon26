@@ -2014,7 +2014,7 @@ MonoBehaviour:
   letterText: {fileID: 1924306033}
   predictiveBox: {fileID: 324833503}
   aiWheel: {fileID: 561223215}
-  deadzone: 0.3
+  deadzone: 0.8
   leftPad: {fileID: 1574569079}
   rightPad: {fileID: 2130318185}
 --- !u!4 &1953952573
