@@ -119,7 +119,7 @@ public class StickComboDisplay : MonoBehaviour
             letterText.text = "_";
             return;
         }
-        getPredictions();
+        //getPredictions(); <-- AI goes here
 
         int leftDir = GetDirection(Gamepad.current.leftStick.ReadValue());
         int rightDir = GetDirection(Gamepad.current.rightStick.ReadValue());
