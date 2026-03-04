@@ -179,7 +179,7 @@ public class StickComboDisplay : MonoBehaviour
 
 
         leftPad.UpdateL(leftDir);
-        rightPad.UpdateR(rightDir);
+        rightPad.UpdateR(leftDir);
 
     }
 
