@@ -6,8 +6,8 @@ public class RF : MonoBehaviour
     public Sprite[] texturesR;
     public int idxR;
 
-    public void UpdateR(int x)
+    public void UpdateR(int x, int y)
     {
-        targetR.sprite = texturesR[x];
+        targetR.sprite = texturesR[(x*10)+y];
     }
 }
