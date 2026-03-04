@@ -17,8 +17,8 @@ public class StickComboDisplay : MonoBehaviour
     public float deadzone = 0.3f;
     private Dictionary<int, string> lookup;
 
-    LF leftPad = new LF();
-    RF rightPad = new RF();
+    public LF leftPad = new LF();
+    public RF rightPad = new RF();
 
     private string output = "";
 
@@ -29,7 +29,7 @@ public class StickComboDisplay : MonoBehaviour
     private string letter = "_";
 
     private Program markov;
-    
+
 
     void Awake()
     {
@@ -128,14 +128,14 @@ public class StickComboDisplay : MonoBehaviour
             rightDir = numbers[rightDir - 1];
         }
         UnityEngine.Debug.Log(leftDir + " " + rightDir);
-        
+
         leftPad.UpdateL(leftDir);
         rightPad.UpdateR(rightDir);
 
         string[] words = updateWheel(leftDir);
 
         //Stick release checks
-        if (letter != "_") 
+        if (letter != "_")
         {
             typeReady = true;
         }
@@ -162,7 +162,7 @@ public class StickComboDisplay : MonoBehaviour
 
             typeReady = false;
 
-        //Go fetch new letter 
+        //Go fetch new letter
         letter = GetLetterFromCombo(leftDir, rightDir);
         if (letter != "Backspace" && letter != "Ctrl+Backspace")
         {
@@ -177,9 +177,9 @@ public class StickComboDisplay : MonoBehaviour
                 words[i] = words[i].ToUpper();
             }
         }
-        
+
         aiWheel.SetWords(words);
-        
+
     }
 
     string[] updateWheel(int left)
@@ -206,9 +206,9 @@ public class StickComboDisplay : MonoBehaviour
         // angle = (angle + 180f) % 360f;  Miles what is this?? anything on a boundary is gunna be separated
 
         int direction = Mathf.FloorToInt((angle + 22.5f) / 45f) % 8;
-        
+
         direction = (direction + 4) % 8; // So instead I rotate indices, not angles
-        
+
         return direction + 1;
     }
 
@@ -219,7 +219,7 @@ public class StickComboDisplay : MonoBehaviour
         {
             return "";
         }
-        
+
 
         int index = (left * 10) + right;
         string found;
@@ -292,7 +292,7 @@ public class StickComboDisplay : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             int j = indices[i];
-            
+
             if (nextWords[i] != "null")
             {
                 lookup[10 + j] = nextWords[i];
@@ -303,7 +303,7 @@ public class StickComboDisplay : MonoBehaviour
             }
         }
         predictiveBox.text = predictedLineOutput.Trim();
-        
+
     }
 
     void Caps()
@@ -326,7 +326,7 @@ public class StickComboDisplay : MonoBehaviour
         string previousWord = null;
         if (!string.IsNullOrWhiteSpace(output))
         {
-           
+
             int lastSpace = output.LastIndexOf(' ');
             if (lastSpace > 0)
             {
