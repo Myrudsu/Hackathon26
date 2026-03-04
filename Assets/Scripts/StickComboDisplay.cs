@@ -129,9 +129,6 @@ public class StickComboDisplay : MonoBehaviour
         }
         UnityEngine.Debug.Log(leftDir + " " + rightDir);
 
-        leftPad.UpdateL(leftDir);
-        rightPad.UpdateR(rightDir);
-
         string[] words = updateWheel(leftDir);
 
         //Stick release checks
@@ -179,6 +176,10 @@ public class StickComboDisplay : MonoBehaviour
         }
 
         aiWheel.SetWords(words);
+
+
+        leftPad.UpdateL(leftDir);
+        rightPad.UpdateR(rightDir);
 
     }
 
