@@ -111,7 +111,6 @@ public class StickComboDisplay : MonoBehaviour
         };
     }
 
-
     void Update()
     {
         if (Gamepad.current == null)
@@ -119,7 +118,7 @@ public class StickComboDisplay : MonoBehaviour
             letterText.text = "_";
             return;
         }
-        //getPredictions(); <-- AI goes here
+                //getPredictions(); <-- Predictive text goes here
 
         int leftDir = GetDirection(Gamepad.current.leftStick.ReadValue());
         int rightDir = GetDirection(Gamepad.current.rightStick.ReadValue());
@@ -131,7 +130,7 @@ public class StickComboDisplay : MonoBehaviour
 
         string[] words = updateWheel(leftDir);
 
-        //Stick release checks
+        // Stick release checks
         if (letter != "_")
         {
             typeReady = true;
@@ -139,34 +138,43 @@ public class StickComboDisplay : MonoBehaviour
         if (typeReady == true && (leftDir == -1 || rightDir == -1))
         {
             if (letter == "Backspace")
-                {
-                    Backspace();
-                }
+            {
+                Backspace();
+            }
             else if (letter == "Ctrl+Backspace")
-                {
-                    CtrlBackspace();
-                }
+            {
+                CtrlBackspace();
+            }
             else if (letter == "Caps")
-                {
-                    Caps();
-                }
+            {
+                Caps();
+            }
             else
-                {
-                // output += letter;
+            {
+                // Append character to output
                 AppendSmart(letter);
-                }
+            }
         }
 
-            typeReady = false;
+        typeReady = false;
 
-        //Go fetch new letter
+        // Go fetch new letter
         letter = GetLetterFromCombo(leftDir, rightDir);
         if (letter != "Backspace" && letter != "Ctrl+Backspace")
         {
-            letterText.text = output + (string.IsNullOrEmpty(letter) ? "_" : letter);
-        }
-        //set the output fields
+            // Split the text: committed part + the next letter (yellow)
+            string committedText = output;
+            string nextLetter = string.IsNullOrEmpty(letter) ? "_" : letter;
 
+            // Set the color to yellow for the next letter only
+            letterText.color = Color.white; // Default color for the committed text
+            string fullText = committedText + "<color=green>" + nextLetter + "</color>";
+
+            // Update the text to show the committed text and next character in yellow
+            letterText.text = fullText;
+        }
+
+        // Set the output fields
         if (capsOn == true)
         {
             for (int i = 0; i < words.Length; i++)
