@@ -8,6 +8,20 @@ public class RF : MonoBehaviour
 
     public void UpdateR(int x, int y)
     {
-        targetR.sprite = texturesR[(x*10)+y];
+
+        if (x == -1)
+        {
+            x = 0;
+        }
+        x = x*10;
+
+
+        if (y == -1)
+        {
+            y = 0;
+        }
+
+
+        targetR.sprite = texturesR[x+y];
     }
 }

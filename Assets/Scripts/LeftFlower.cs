@@ -6,8 +6,14 @@ public class LF : MonoBehaviour
     public Sprite[] texturesL;
     public int idxL;
 
+
     public void UpdateL(int x)
     {
+        if (x == -1)
+        {
+            x = 0;
+        }
+
         targetL.sprite = texturesL[x];
     }
 }
