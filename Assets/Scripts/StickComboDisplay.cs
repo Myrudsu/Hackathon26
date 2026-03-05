@@ -17,8 +17,8 @@ public class StickComboDisplay : MonoBehaviour
     public float deadzone = 0.3f;
     private Dictionary<int, string> lookup;
 
-    LF leftPad = new LF();
-    RF rightPad = new RF();
+    public LF leftPad = new LF();
+    public RF rightPad = new RF();
 
     private string output = "";
 
@@ -29,7 +29,7 @@ public class StickComboDisplay : MonoBehaviour
     private string letter = "_";
 
     private Program markov;
-    
+
 
     void Awake()
     {
@@ -111,7 +111,6 @@ public class StickComboDisplay : MonoBehaviour
         };
     }
 
-
     void Update()
     {
         if (Gamepad.current == null)
@@ -119,7 +118,7 @@ public class StickComboDisplay : MonoBehaviour
             letterText.text = "_";
             return;
         }
-        getPredictions();
+                //getPredictions(); <-- Predictive text goes here
 
         int leftDir = GetDirection(Gamepad.current.leftStick.ReadValue());
         int rightDir = GetDirection(Gamepad.current.rightStick.ReadValue());
@@ -128,48 +127,54 @@ public class StickComboDisplay : MonoBehaviour
             rightDir = numbers[rightDir - 1];
         }
         UnityEngine.Debug.Log(leftDir + " " + rightDir);
-        
-        leftPad.UpdateL(leftDir);
-        rightPad.UpdateR(rightDir);
 
         string[] words = updateWheel(leftDir);
 
-        //Stick release checks
-        if (letter != "_") 
+        // Stick release checks
+        if (letter != "_")
         {
             typeReady = true;
         }
         if (typeReady == true && (leftDir == -1 || rightDir == -1))
         {
             if (letter == "Backspace")
-                {
-                    Backspace();
-                }
+            {
+                Backspace();
+            }
             else if (letter == "Ctrl+Backspace")
-                {
-                    CtrlBackspace();
-                }
+            {
+                CtrlBackspace();
+            }
             else if (letter == "Caps")
-                {
-                    Caps();
-                }
+            {
+                Caps();
+            }
             else
-                {
-                // output += letter;
+            {
+                // Append character to output
                 AppendSmart(letter);
-                }
+            }
         }
 
-            typeReady = false;
+        typeReady = false;
 
-        //Go fetch new letter 
+        // Go fetch new letter
         letter = GetLetterFromCombo(leftDir, rightDir);
         if (letter != "Backspace" && letter != "Ctrl+Backspace")
         {
-            letterText.text = output + (string.IsNullOrEmpty(letter) ? "_" : letter);
-        }
-        //set the output fields
+            // Split the text: committed part + the next letter (yellow)
+            string committedText = output;
+            string nextLetter = string.IsNullOrEmpty(letter) ? "_" : letter;
 
+            // Set the color to yellow for the next letter only
+            letterText.color = Color.white; // Default color for the committed text
+            string fullText = committedText + "<color=green>" + nextLetter + "</color>";
+
+            // Update the text to show the committed text and next character in yellow
+            letterText.text = fullText;
+        }
+
+        // Set the output fields
         if (capsOn == true)
         {
             for (int i = 0; i < words.Length; i++)
@@ -177,9 +182,13 @@ public class StickComboDisplay : MonoBehaviour
                 words[i] = words[i].ToUpper();
             }
         }
-        
+
         aiWheel.SetWords(words);
-        
+
+
+        leftPad.UpdateL(leftDir);
+        rightPad.UpdateR(leftDir, rightDir);
+
     }
 
     string[] updateWheel(int left)
@@ -206,9 +215,9 @@ public class StickComboDisplay : MonoBehaviour
         // angle = (angle + 180f) % 360f;  Miles what is this?? anything on a boundary is gunna be separated
 
         int direction = Mathf.FloorToInt((angle + 22.5f) / 45f) % 8;
-        
+
         direction = (direction + 4) % 8; // So instead I rotate indices, not angles
-        
+
         return direction + 1;
     }
 
@@ -219,7 +228,7 @@ public class StickComboDisplay : MonoBehaviour
         {
             return "";
         }
-        
+
 
         int index = (left * 10) + right;
         string found;
@@ -292,7 +301,7 @@ public class StickComboDisplay : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             int j = indices[i];
-            
+
             if (nextWords[i] != "null")
             {
                 lookup[10 + j] = nextWords[i];
@@ -303,7 +312,7 @@ public class StickComboDisplay : MonoBehaviour
             }
         }
         predictiveBox.text = predictedLineOutput.Trim();
-        
+
     }
 
     void Caps()
@@ -326,7 +335,7 @@ public class StickComboDisplay : MonoBehaviour
         string previousWord = null;
         if (!string.IsNullOrWhiteSpace(output))
         {
-           
+
             int lastSpace = output.LastIndexOf(' ');
             if (lastSpace > 0)
             {
